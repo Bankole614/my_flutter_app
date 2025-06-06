@@ -10,26 +10,33 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(''),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(24.0),
           child:
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Login'),
-              SizedBox(height: 20,),
-              Text('Enter your email and password to login'),
+              Text('Login', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 24)),
+              SizedBox(height: 16),
+              Text(
+                'Enter your email and password to login',
+                style: TextStyle(
+                    fontSize: 16, color: Colors.grey[800],
+                ),
+              ),
+              SizedBox(height: 24),
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
@@ -40,13 +47,23 @@ class _LoginScreenState extends State<LoginScreen> {
               // Password Field
               TextField(
                 controller: passwordController,
-                decoration: const InputDecoration(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
+                  ),
                 ),
-                obscureText: true,
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
 
               // Login Button
               SizedBox(
@@ -56,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     padding: EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -72,3 +89,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+

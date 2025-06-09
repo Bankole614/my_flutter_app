@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'confirm_phone.dart';
 
 class RegisterScreen1 extends StatefulWidget {
   const RegisterScreen1({super.key});
@@ -78,7 +79,10 @@ class _RegisterScreen1State extends State<RegisterScreen1> {
                   padding: EdgeInsets.symmetric(vertical: 16),
                 ),
                 onPressed: () {
-                  // Placeholder for login action
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const ConfirmPhone()),
+                  );
                 },
                 child: Text('Sign up'),
               ),
